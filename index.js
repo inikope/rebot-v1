@@ -52,44 +52,46 @@ app.get('/', (req, res) => {
         let iglink;
 
         const storeName = (result) => {
-            console.log(result.data);
             fullName = result.data;
         }
         const storeBio = (result) => {
-            console.log(result.data);
             igbio = result.data;
         }
         const storePosts = (result) => {
-            console.log(result.data);
             igpost = result.data;
         }
         const storeFollower = (result) => {
-            console.log(result.data);
             igfollower = result.data;
         }
         const storeFollowing = (result) => {
-            console.log(result.data);
             igfollowing = result.data;
         }
         const storeLink = (result) => {
-            console.log(result.data);
-            iglink = result.data;
+            if(result === 'false'){
+                iglink = '-';
+            } else {
+                iglink = result.data;
+            }
         }
-    
-        instaProf.getFullname(igid).then(storeName);
-        instaProf.getBio(igid).then(storeBio);
-	    instaProf.getPosts(igid).then(storePosts);
-	    instaProf.getFollowers(igid).then(storeFollower);
-	    instaProf.getFollowing(igid).then(storeFollowing);
-	    instaProf.getExternalUrl(igid).then(storeLink);
-        console.log(fullName);
-        console.log(igbio);
-        console.log(igpost);
-        console.log(igfollower);
-        console.log(igfollowing);
-        console.log(iglink);
-        const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ igpost +"\nFollowers: "+ igfollower +"\nFollowing: "+ igfollowing +"\nLink: "+ iglink;
-        return replyText(token, sendBio);
+
+        async function parallel() {
+            await Promise.all([
+                (async()=>console.log(await instaProf.getFullname(igid).then(storeName)))(),
+                (async()=>console.log(await instaProf.getBio(igid).then(storeBio)))(),
+                (async()=>console.log(await instaProf.getPosts(igid).then(storePosts)))(),
+                (async()=>console.log(await instaProf.getFollowers(igid).then(storeFollower)))(),
+                (async()=>console.log(await instaProf.getFollowing(igid).then(storeFollowing)))(),
+                (async()=>console.log(await instaProf.getExternalUrl(igid).then(storeLink)))()
+            ])
+            console.log(fullName);
+            console.log(igbio);
+            console.log(igpost);
+            console.log(igfollower);
+            console.log(igfollowing);
+            console.log(iglink);    
+            const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ igpost +"\nFollowers: "+ igfollower +"\nFollowing: "+ igfollowing +"\nLink: "+ iglink;
+            return replyText(token, sendBio);
+        }
     }
 
     function profilIG(token, igid){
