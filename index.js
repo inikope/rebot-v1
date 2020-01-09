@@ -51,9 +51,16 @@ app.get('/', (req, res) => {
             const p5 = instaProf.getFollowing(igid);
             const p6 = instaProf.getExternalUrl(igid);
             Promise.all([p1,p2,p3,p4,p5,p6]).then(function(values){
+                function checkBio(value){
+                    if(value){
+                        return value.replace("\\\\","\\");
+                    } else {
+                        return '-';
+                    }
+                }
                 console.log(values);
                 const fullName = (values[0].data)? values[0].data : '-';
-                const igbio = (values[1].data)? values[1].data : '-';
+                const igbio = checkBio(values[1].data);
                 const iglink = (values[5].data)? values[5].data : '-';
                 console.log("Full Name: " + fullName);
                 console.log("Bio Instagram: " +igbio);
@@ -64,18 +71,14 @@ app.get('/', (req, res) => {
     }
 
     function profilIG(token, igid){
-        var userprevlink;
-        var userhdlink;
-	    instaProf.instaRegular(igid).then(res => {
-            this.userprevlink = res.data;
-        });
-        instaProf.instaHighDefinition(igid).then(res => {
-            this.userhdlink = res.data;
-        });
-	    
-        return client.replyMessage(token, {
-            type: "image", originalContentUrl: userhdlink, previewImageUrl: userprevlink
-        });
+	    const p1 = instaProf.instaRegular(igid);
+        const p2 = instaProf.instaHighDefinition(igid);
+        
+        Promise.all([p1,p2]).then(function(values){
+            return client.replyMessage(token, {
+                type: "image", originalContentUrl: values[1].data, previewImageUrl: values[0].data
+            });    
+        })
     }
 
   // event handler
