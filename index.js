@@ -53,23 +53,24 @@ app.get('/', (req, res) => {
         var iglink;
 
 	    instaProf.getFullname(igid).then(res => {
-            fullName = res.data;
+            this.fullName = res.data;
         });
 	    instaProf.getBio(igid).then(res => {
-            igbio = res.data;
+            this.igbio = res.data;
         });
 	    instaProf.getPosts(igid).then(res => {
-            igpost = res.data;
+            this.igpost = res.data;
         });
 	    instaProf.getFollowers(igid).then(res => {
-            igfollower = res.data;
+            this.igfollower = res.data;
         });
 	    instaProf.getFollowing(igid).then(res => {
-            igfollowing = res.data;
+            this.igfollowing = res.data;
         });
 	    instaProf.getExternalUrl(igid).then(res => {
-            iglink = res.data;
+            this.iglink = res.data;
         });
+        console.log(fullName);
         const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ igpost +"\nFollowers: "+ igfollower +"\nFollowing: "+ igfollowing +"\nLink: "+ iglink;
         return replyText(token, sendBio);
     }
@@ -78,10 +79,10 @@ app.get('/', (req, res) => {
         var userprevlink;
         var userhdlink;
 	    instaProf.instaRegular(igid).then(res => {
-            userprevlink = res.data;
+            this.userprevlink = res.data;
         });
         instaProf.instaHighDefinition(igid).then(res => {
-            userhdlink = res.data;
+            this.userhdlink = res.data;
         });
 	    
         return client.replyMessage(token, {
