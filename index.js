@@ -52,9 +52,11 @@ app.get('/', (req, res) => {
         var igfollowing = 0;
         var iglink = "";
 
-	    instaProf.getFullname(igid).then(res => {
+        instaProf.getFullname(igid).then(res => {
             var name = res.data;
+            console.log("var name = "+ name);
             fullName = fullName + name;
+            console.log("fullName = "+ fullName);
         });
 	    instaProf.getBio(igid).then(res => {
             this.igbio = res.data;
