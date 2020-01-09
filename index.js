@@ -55,11 +55,12 @@ app.get('/', (req, res) => {
         instaProf.getFullname(igid).then(res => {
             var name = res.data;
             console.log("var name = "+ name);
-            fullName = fullName + name;
+            const fullName = fullName + name;
             console.log("fullName = "+ fullName);
         });
 	    instaProf.getBio(igid).then(res => {
-            this.igbio = res.data;
+            var bio = res.data;
+            const igbio = igbio + bio;
         });
 	    instaProf.getPosts(igid).then(res => {
             this.igpost = res.data;
