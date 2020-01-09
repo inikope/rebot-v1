@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
     function getIGfullName(igid){
 	instaProf.getFullname(igid).then(res => {
 	    const fullName = res.data;
+	    console.log(fullName);
             return fullName;
         });
     }
