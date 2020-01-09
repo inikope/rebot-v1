@@ -42,44 +42,35 @@ app.get('/', (req, res) => {
 
     //Bio IG
     function bioIG(token, igid){
-        const fullName;
-        const igBio;
-        const igLink;
-        const jmlPost;
-        const jmlFollowing;
-        const jmlFollower;
 
         instaProf.getFullname(igid).then(res => {
-            fullName = res.data;
+            const fullName = res.data;
         });
         instaProf.getBio(igid).then(res =>{
-            igBio = res.data;
+            const igBio = res.data;
         });
         instaProf.getExternalUrl(igid).then(res =>{
-            igLink = res.data;
+            const igLink = res.data;
         });
         instaProf.getPosts(igid).then(res =>{
-            jmlPost = res.data;
+            const jmlPost = res.data;
         });
         instaProf.getFollowers(igid).then(res =>{
-            jmlFollower = res.data;
+            const jmlFollower = res.data;
         });
         instaProf.getFollowing(igid).then(res =>{
-            jmlFollowing = res.data;
+            const jmlFollowing = res.data;
         });
         const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igBio + "\nPosts: "+jmlPost+"\nFollowers: "+jmlFollower+"\nFollowing: "+jmlFollowing+"Link: "+igLink;
-        return replyText (token, sendBio);
+        return replyText(token, sendBio);
     }
 
     function profilIG(token, igid){
-        const userhdlink;
-        const userprevlink;
-
         instaProf.instaRegular(igid).then(res => {
-            userprevlink = res.data;
+            const userprevlink = res.data;
         });
         instaProf.instaHighDefinition(igid).then(res =>{
-            userhdlink = res.data;
+            const userhdlink = res.data;
         });
         return client.replyMessage(token, {
             type: "image", originalContentUrl: userhdlink, previewImageUrl: userprevlink
