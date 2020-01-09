@@ -54,6 +54,7 @@ app.get('/', (req, res) => {
 
         fullName =instaProf.getFullname(igid).then(res => {
             var name = res.data;
+            console.log(name);
             return name;
             // console.log("var name = "+ name);
             // fullName = fullName + name;
