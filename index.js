@@ -53,23 +53,23 @@ app.get('/', (req, res) => {
 
         const storeName = (result) => {
             fullName = result.data;
-            return;
+            console.log(fullName);
         }
         const storeBio = (result) => {
             igbio = result.data;
-            return;
+            console.log(igbio);
         }
         const storePosts = (result) => {
             igpost = result.data;
-            return;
+            console.log(igpost);
         }
         const storeFollower = (result) => {
             igfollower = result.data;
-            return;
+            console.log(igfollower);
         }
         const storeFollowing = (result) => {
             igfollowing = result.data;
-            return;
+            console.log(igfollowing);
         }
         const storeLink = (result) => {
             if(result === 'false'){
@@ -77,27 +77,16 @@ app.get('/', (req, res) => {
             } else {
                 iglink = result.data;
             }
-            return;
+            console.log(iglink);
         }
-
-        async function parallel() {
-            await Promise.all([
-                (async()=>console.log(await instaProf.getFullname(igid).then(storeName)))(),
-                (async()=>console.log(await instaProf.getBio(igid).then(storeBio)))(),
-                (async()=>console.log(await instaProf.getPosts(igid).then(storePosts)))(),
-                (async()=>console.log(await instaProf.getFollowers(igid).then(storeFollower)))(),
-                (async()=>console.log(await instaProf.getFollowing(igid).then(storeFollowing)))(),
-                (async()=>console.log(await instaProf.getExternalUrl(igid).then(storeLink)))()
-            ])
-            console.log(fullName);
-            console.log(igbio);
-            console.log(igpost);
-            console.log(igfollower);
-            console.log(igfollowing);
-            console.log(iglink);    
-            const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ igpost +"\nFollowers: "+ igfollower +"\nFollowing: "+ igfollowing +"\nLink: "+ iglink;
-            return replyText(token, sendBio);
-        }
+            instaProf.getFullname(igid).then(storeName);
+            instaProf.getBio(igid).then(storeBio);
+            instaProf.getPosts(igid).then(storePosts);
+            instaProf.getFollowers(igid).then(storeFollower);
+            instaProf.getFollowing(igid).then(storeFollowing);
+            instaProf.getExternalUrl(igid).then(storeLink);
+        const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ igpost +"\nFollowers: "+ igfollower +"\nFollowing: "+ igfollowing +"\nLink: "+ iglink;
+        return replyText(token, sendBio);
     }
 
     function profilIG(token, igid){
