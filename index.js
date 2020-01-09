@@ -42,17 +42,21 @@ app.get('/', (req, res) => {
 
 
 
-
     //Bio IG
     function bioIG(token, igid){
-        var fullName = "";
-        var igbio = "";
-        var igpost = 0;
-        var igfollower = 0;
-        var igfollowing = 0;
-        var iglink = "";
+        let fullName;
+        let igbio;
+        let igpost;
+        let igfollower;
+        let igfollowing;
+        let iglink;
 
-        fullName = await instaProf.getFullname(igid);
+        const myAsyncFunc = (result) => {
+            console.log(result.data);
+            fullName = result.data;
+        }
+    
+        instaProf.getFullname(igid).then(myAsyncFunc);
         console.log(fullName);
         igbio = instaProf.getBio(igid).data;
         console.log(igbio);
