@@ -107,6 +107,15 @@ app.get('/', (req, res) => {
             const p6 = instaProf.getExternalUrl(igid);
             Promise.all([p1,p2,p3,p4,p5,p6]).then(function(values){
                 console.log(values);
+                if(values[1].data === false){
+                    values[1].data = '-';
+                }
+                if(values[2].data === false){
+                    values[2].data = '-';
+                }
+                if(values[6].data === false){
+                    values[6].data = '-';
+                }
                 const sendBio = "Nama: "+ values[1].data +"\nBio:\n"+ values[2].data + "\nPosts: "+ values[3].data +"\nFollowers: "+ values[4].data +"\nFollowing: "+ values[5].data +"\nLink: "+ values[6].data;
                 return replyText(token, sendBio);    
             })
