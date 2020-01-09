@@ -53,8 +53,8 @@ app.get('/', (req, res) => {
         var iglink = "";
 
 	    instaProf.getFullname(igid).then(res => {
-            this.bioIG.fullName = res.data;
-            this.fullName = res.data;
+            var name = res.data;
+            fullName = fullName + name;
         });
 	    instaProf.getBio(igid).then(res => {
             this.igbio = res.data;
