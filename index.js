@@ -45,12 +45,12 @@ app.get('/', (req, res) => {
 
     //Bio IG
     function bioIG(token, igid){
-        var fullName = instaProf.specificField(igid, 'fullname').data;
-        var igbio = instaProf.specificField(igid, 'bio').data;
-        var igpost = instaProf.specificField(igid, 'posts').data;
-        var igfollower = instaProf.specificField(igid, 'followers').data;
-        var igfollowing = instaProf.specificField(igid, 'following').data;
-        var iglink = instaProf.specificField(igid, 'externalUrl').data;
+        var fullName = instaProf.specificField(igid, 'fullname');
+        var igbio = instaProf.specificField(igid, 'bio');
+        var igpost = instaProf.specificField(igid, 'posts');
+        var igfollower = instaProf.specificField(igid, 'followers');
+        var igfollowing = instaProf.specificField(igid, 'following');
+        var iglink = instaProf.specificField(igid, 'externalUrl');
 
 	    // instaProf.getFullname(igid).then(res => {
         //     fullName = res.data;
