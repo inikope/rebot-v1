@@ -42,24 +42,30 @@ app.get('/', (req, res) => {
 
     //Bio IG
     function bioIG(token, igid){
+	    const fullName;
+	    const igBio;
+	    const igLink;
+	    const jmlPost;
+	    const jmlFollower;
+	    const jmlFollowing;
 
         instaProf.getFullname(igid).then(res => {
-            const fullName = res.data;
+            fullName = res.data;
         });
         instaProf.getBio(igid).then(res =>{
-            const igBio = res.data;
+            igBio = res.data;
         });
         instaProf.getExternalUrl(igid).then(res =>{
-            const igLink = res.data;
+            igLink = res.data;
         });
         instaProf.getPosts(igid).then(res =>{
-            const jmlPost = res.data;
+            jmlPost = res.data;
         });
         instaProf.getFollowers(igid).then(res =>{
-            const jmlFollower = res.data;
+            jmlFollower = res.data;
         });
         instaProf.getFollowing(igid).then(res =>{
-            const jmlFollowing = res.data;
+            jmlFollowing = res.data;
         });
         const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igBio + "\nPosts: "+jmlPost+"\nFollowers: "+jmlFollower+"\nFollowing: "+jmlFollowing+"Link: "+igLink;
         return replyText(token, sendBio);
