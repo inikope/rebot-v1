@@ -44,61 +44,61 @@ app.get('/', (req, res) => {
 
     //Bio IG
     function bioIG(token, igid){
-        let fullName;
-        let igbio;
-        let igpost;
-        let igfollower;
-        let igfollowing;
-        let iglink;
+        // let fullName;
+        // let igbio;
+        // let igpost;
+        // let igfollower;
+        // let igfollowing;
+        // let iglink;
 
-        const storeName = (result) => {
-            new Promise(function(resolve, reject) {
-                if(result.data === 'false'){
-                    fullName = '-';
-                } else {
-                    fullName = result.data;
-                }    
-                resolve(fullName);
-            })
-        }
-        const storeBio = (result) => {
-            new Promise(function(resolve, reject) {
-                if(result.data === 'false'){
-                igbio = '-';
-            } else {
-                igbio = result.data;
-            }
-            resolve(igbio);
-            })
-        }
-        const storePosts = (result) => {
-            new Promise(function(resolve, reject) {
-                igpost = result.data;
-                resolve(igpost);
-            })
-        }
-        const storeFollower = (result) => {
-            new Promise(function(resolve, reject) {
-                igfollower = result.data;
-                resolve(igfollower);
-            })
-        }
-        const storeFollowing = (result) => {
-            new Promise(function(resolve, reject) {
-                igfollowing = result.data;
-                resolve(igfollowing);
-            })
-        }
-        const storeLink = (result) => {
-            new Promise(function(resolve, reject) {
-                if(result.data === 'false'){
-                iglink = '-';
-            } else {
-                iglink = result.data;
-            }
-            resolve(iglink);
-            })
-        }
+        // const storeName = (result) => {
+        //     new Promise(function(resolve, reject) {
+        //         if(result.data === 'false'){
+        //             fullName = '-';
+        //         } else {
+        //             fullName = result.data;
+        //         }    
+        //         resolve(fullName);
+        //     })
+        // }
+        // const storeBio = (result) => {
+        //     new Promise(function(resolve, reject) {
+        //         if(result.data === 'false'){
+        //         igbio = '-';
+        //     } else {
+        //         igbio = result.data;
+        //     }
+        //     resolve(igbio);
+        //     })
+        // }
+        // const storePosts = (result) => {
+        //     new Promise(function(resolve, reject) {
+        //         igpost = result.data;
+        //         resolve(igpost);
+        //     })
+        // }
+        // const storeFollower = (result) => {
+        //     new Promise(function(resolve, reject) {
+        //         igfollower = result.data;
+        //         resolve(igfollower);
+        //     })
+        // }
+        // const storeFollowing = (result) => {
+        //     new Promise(function(resolve, reject) {
+        //         igfollowing = result.data;
+        //         resolve(igfollowing);
+        //     })
+        // }
+        // const storeLink = (result) => {
+        //     new Promise(function(resolve, reject) {
+        //         if(result.data === 'false'){
+        //         iglink = '-';
+        //     } else {
+        //         iglink = result.data;
+        //     }
+        //     resolve(iglink);
+        //     })
+        // }
             const p1 = instaProf.getFullname(igid);
             const p2 = instaProf.getBio(igid);
             const p3 = instaProf.getPosts(igid);
@@ -107,7 +107,7 @@ app.get('/', (req, res) => {
             const p6 = instaProf.getExternalUrl(igid);
             Promise.all([p1,p2,p3,p4,p5,p6]).then(function(values){
                 console.log(values);
-                const sendBio = "Nama: "+ values[1] +"\nBio:\n"+ values[2] + "\nPosts: "+ values[3] +"\nFollowers: "+ values[4] +"\nFollowing: "+ values[5] +"\nLink: "+ values[6];
+                const sendBio = "Nama: "+ values[1].data +"\nBio:\n"+ values[2].data + "\nPosts: "+ values[3].data +"\nFollowers: "+ values[4].data +"\nFollowing: "+ values[5].data +"\nLink: "+ values[6].data;
                 return replyText(token, sendBio);    
             })
     }
