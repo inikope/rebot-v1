@@ -41,55 +41,49 @@ app.get('/', (req, res) => {
 	// return client.replyMessage(event.replyToken, tutorVid);
 
 // IG Get functions
-    function getIGfullName(igid){
-	instaProf.getFullname(igid).then(res => {
-	    const fullName = res.data;
-	    console.log(fullName);
-            return fullName;
-        });
-    }
-    function getIGbio(igid){
-	instaProf.getBio(igid).then(res => {
-	    const user = res.data;
-            return user;
-        });
-    }
-    function getIGlink(igid){
-	instaProf.getExternalUrl(igid).then(res => {
-	    const user = res.data;
-            return user;
-        });
-    }
-    function getIGPost(igid){
-	instaProf.getPosts(igid).then(res => {
-	    const user = res.data;
-            return user;
-        });
-    }
-    function getIGFoll(igid){
-	instaProf.getFollowers(igid).then(res => {
-	    const user = res.data;
-            return user;
-        });
-    }
-    function getIGFolli(igid){
-	instaProf.getFollowing(igid).then(res => {
-	    const user = res.data;
-            return user;
-        });
-    }
-    function getIGpicprev(igid){
-	instaProf.instaRegular(igid).then(res => {
-	    const user = res.data;
-            return user;
-        });
-    }
-    function getIGpichd(igid){
-	instaProf.instaHighDefinition(igid).then(res => {
-	    const user = res.data;
-            return user;
-        });
-    }
+    function getIG(what, igid){
+	    switch(what){
+		    case 'fullName':
+            	const fullName = instaProf.getFullname(igid).then(res => {
+	            const fullName = res.data;
+                return fullName;
+            }); return fullName;
+            case 'bio':
+            	const user = instaProf.getBio(igid).then(res => {
+	            const user = res.data;
+                return user;
+            });return user;
+            case 'link':
+            	const user = instaProf.getExternalUrl(igid).then(res => {
+	            const user = res.data;
+                return user;
+            });return user;
+            case 'post':
+            	const user = instaProf.getPosts(igid).then(res => {
+        	    const user = res.data;
+                return user;
+            });return user;
+            case 'follower':
+            	const user = instaProf.getFollowers(igid).then(res => {
+        	    const user = res.data;
+                return user;
+            });return user;
+            case 'following':
+            	const user = instaProf.getFollowing(igid).then(res => {
+	            const user = res.data;
+                return user;
+            });return user;
+            case 'picprev':
+            	const user = instaProf.instaRegular(igid).then(res => {
+	            const user = res.data;
+                return user;
+            });return user;
+            case 'pichd':
+            	const user = instaProf.instaHighDefinition(igid).then(res => {
+	            const user = res.data;
+                return user;
+            });return user;
+        }
 
 
 
