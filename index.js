@@ -52,41 +52,63 @@ app.get('/', (req, res) => {
         let iglink;
 
         const storeName = (result) => {
-            fullName = result.data;
-            console.log(fullName);
+            new Promise(function(resolve, reject) {
+                if(result.data === 'false'){
+                    fullName = '-';
+                } else {
+                    fullName = result.data;
+                }    
+                resolve(fullName);
+            })
         }
         const storeBio = (result) => {
-            igbio = result.data;
-            console.log(igbio);
+            new Promise(function(resolve, reject) {
+                if(result.data === 'false'){
+                igbio = '-';
+            } else {
+                igbio = result.data;
+            }
+            resolve(igbio);
+            })
         }
         const storePosts = (result) => {
-            igpost = result.data;
-            console.log(igpost);
+            new Promise(function(resolve, reject) {
+                igpost = result.data;
+                resolve(igpost);
+            })
         }
         const storeFollower = (result) => {
-            igfollower = result.data;
-            console.log(igfollower);
+            new Promise(function(resolve, reject) {
+                igfollower = result.data;
+                resolve(igfollower);
+            })
         }
         const storeFollowing = (result) => {
-            igfollowing = result.data;
-            console.log(igfollowing);
+            new Promise(function(resolve, reject) {
+                igfollowing = result.data;
+                resolve(igfollowing);
+            })
         }
         const storeLink = (result) => {
-            if(result === 'false'){
+            new Promise(function(resolve, reject) {
+                if(result.data === 'false'){
                 iglink = '-';
             } else {
                 iglink = result.data;
             }
-            console.log(iglink);
+            resolve(iglink);
+            })
         }
-            instaProf.getFullname(igid).then(storeName);
-            instaProf.getBio(igid).then(storeBio);
-            instaProf.getPosts(igid).then(storePosts);
-            instaProf.getFollowers(igid).then(storeFollower);
-            instaProf.getFollowing(igid).then(storeFollowing);
-            instaProf.getExternalUrl(igid).then(storeLink);
-        const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ igpost +"\nFollowers: "+ igfollower +"\nFollowing: "+ igfollowing +"\nLink: "+ iglink;
-        return replyText(token, sendBio);
+            const p1 = instaProf.getFullname(igid).then(storeName);
+            const p2 = instaProf.getBio(igid).then(storeBio);
+            const p3 = instaProf.getPosts(igid).then(storePosts);
+            const p4 = instaProf.getFollowers(igid).then(storeFollower);
+            const p5 = instaProf.getFollowing(igid).then(storeFollowing);
+            const p6 = instaProf.getExternalUrl(igid).then(storeLink);
+            Promise.all([p1,p2,p3,p4,p5,p6]).then(function(values){
+                const sendBio = "Nama: "+ values[1] +"\nBio:\n"+ values[2] + "\nPosts: "+ values[3] +"\nFollowers: "+ values[4] +"\nFollowing: "+ values[5] +"\nLink: "+ values[6];
+                return replyText(token, sendBio);    
+            })
     }
 
     function profilIG(token, igid){
