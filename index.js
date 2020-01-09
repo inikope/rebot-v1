@@ -42,68 +42,70 @@ app.get('/', (req, res) => {
 
 // IG Get functions
     function getIG(what, igid){
+        const kembali;
 	    switch(what){
 		    case 'fullName':
-            	const fullName = instaProf.getFullname(igid).then(res => {
+            	kembali = instaProf.getFullname(igid).then(res => {
 	            const fullName = res.data;
                 return fullName;
-            }); return fullName;
+            }); break;
             case 'bio':
-            	const user = instaProf.getBio(igid).then(res => {
+            	kembali = instaProf.getBio(igid).then(res => {
 	            const user = res.data;
                 return user;
-            });return user;
+            });break;
             case 'link':
-            	const user = instaProf.getExternalUrl(igid).then(res => {
+            	kembali = instaProf.getExternalUrl(igid).then(res => {
 	            const user = res.data;
                 return user;
-            });return user;
+            });break;
             case 'post':
-            	const user = instaProf.getPosts(igid).then(res => {
+            	kembali = instaProf.getPosts(igid).then(res => {
         	    const user = res.data;
                 return user;
-            });return user;
+            });break;
             case 'follower':
-            	const user = instaProf.getFollowers(igid).then(res => {
+            	kembali = instaProf.getFollowers(igid).then(res => {
         	    const user = res.data;
                 return user;
-            });return user;
+            });break;
             case 'following':
-            	const user = instaProf.getFollowing(igid).then(res => {
+            	kembali = instaProf.getFollowing(igid).then(res => {
 	            const user = res.data;
                 return user;
-            });return user;
+            });break;
             case 'picprev':
-            	const user = instaProf.instaRegular(igid).then(res => {
+            	kembali = instaProf.instaRegular(igid).then(res => {
 	            const user = res.data;
                 return user;
-            });return user;
+            });break;
             case 'pichd':
-            	const user = instaProf.instaHighDefinition(igid).then(res => {
+            	kembali = instaProf.instaHighDefinition(igid).then(res => {
 	            const user = res.data;
                 return user;
-            });return user;
+            });break;
         }
+        return kembali;
 
 
 
 
     //Bio IG
     function bioIG(token, igid){
-	    const fullName = getIGfullName(igid);
-	    const igBio = getIGbio(igid);
-	    const igLink = getIGlink(igid);
-	    const jmlPost = getIGPost(igid);
-	    const jmlFollower = getIGFoll(igid);
-	    const jmlFollowing = getIGFolli(igid);
+	    const fullName = getIG("fullName", igid);
+	    const igBio = getIG("bio", igid);
+	    const igLink = getIG("link", igid);
+	    const jmlPost = getIG("post", igid);
+	    const jmlFollower = getIG("follower", igid);
+	    const jmlFollowing = getIG("following", igid);
 
 	const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igBio + "\nPosts: "+jmlPost+"\nFollowers: "+jmlFollower+"\nFollowing: "+jmlFollowing+"\nLink: "+igLink;
         return replyText(token, sendBio);
     }
 
     function profilIG(token, igid){
-	    const userprevlink = getIGpicprev(igid);
-	    const userhdlink = getIGpichd(igid);
+	    const userprevlink = getIG("picprev", igid);
+	    const userhdlink = getIG("pichd", igid);
 	    
         return client.replyMessage(token, {
             type: "image", originalContentUrl: userhdlink, previewImageUrl: userprevlink
