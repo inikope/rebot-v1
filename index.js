@@ -99,13 +99,14 @@ app.get('/', (req, res) => {
             resolve(iglink);
             })
         }
-            const p1 = instaProf.getFullname(igid).then(storeName);
-            const p2 = instaProf.getBio(igid).then(storeBio);
-            const p3 = instaProf.getPosts(igid).then(storePosts);
-            const p4 = instaProf.getFollowers(igid).then(storeFollower);
-            const p5 = instaProf.getFollowing(igid).then(storeFollowing);
-            const p6 = instaProf.getExternalUrl(igid).then(storeLink);
+            const p1 = instaProf.getFullname(igid);
+            const p2 = instaProf.getBio(igid);
+            const p3 = instaProf.getPosts(igid);
+            const p4 = instaProf.getFollowers(igid);
+            const p5 = instaProf.getFollowing(igid);
+            const p6 = instaProf.getExternalUrl(igid);
             Promise.all([p1,p2,p3,p4,p5,p6]).then(function(values){
+                console.log(values);
                 const sendBio = "Nama: "+ values[1] +"\nBio:\n"+ values[2] + "\nPosts: "+ values[3] +"\nFollowers: "+ values[4] +"\nFollowing: "+ values[5] +"\nLink: "+ values[6];
                 return replyText(token, sendBio);    
             })
