@@ -45,19 +45,41 @@ app.get('/', (req, res) => {
 
     //Bio IG
     function bioIG(token, igid){
-	    instaProf.getAll(igid).then(res => {
-            const user = res.data;
-            const sendBio = "Nama: "+ user.fullname +"\nBio:\n"+ user.bio + "\nPosts: "+ user.posts +"\nFollowers: "+ user.followers +"\nFollowing: "+ user.following +"\nLink: "+ user.link;
-            return replyText(token, sendBio);
+        var fullName;
+        var igbio;
+        var igpost;
+        var igfollower;
+        var igfollowing;
+        var iglink;
+
+	    instaProf.getFullname(igid).then(res => {
+            fullName = res.data;
         });
+	    instaProf.getBio(igid).then(res => {
+            igbio = res.data;
+        });
+	    instaProf.getPosts(igid).then(res => {
+            igpost = res.data;
+        });
+	    instaProf.getFollowers(igid).then(res => {
+            igfollower = res.data;
+        });
+	    instaProf.getFollowing(igid).then(res => {
+            igfollowing = res.data;
+        });
+	    instaProf.getExternalUrl(igid).then(res => {
+            iglink = res.data;
+        });
+        const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ igpost +"\nFollowers: "+ igfollower +"\nFollowing: "+ igfollowing +"\nLink: "+ iglink;
+        return replyText(token, sendBio);
     }
 
     function profilIG(token, igid){
         var userprevlink;
+        var userhdlink;
 	    instaProf.instaRegular(igid).then(res => {
             userprevlink = res.data;
         });
-        var userhdlink
         instaProf.instaHighDefinition(igid).then(res => {
             userhdlink = res.data;
         });
