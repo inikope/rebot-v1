@@ -40,72 +40,49 @@ app.get('/', (req, res) => {
 	// Reply yg asli:
 	// return client.replyMessage(event.replyToken, tutorVid);
 
-// IG Get functions
-    function getIG(what, igid){
-        var kembali;
-	    switch(what){
-		    case 'fullName':
-            	kembali = instaProf.getFullname(igid).then(res => {
-	            const fullName = res.data;
-                return fullName;
-            }); break;
-            case 'bio':
-            	kembali = instaProf.getBio(igid).then(res => {
-	            const user = res.data;
-                return user;
-            });break;
-            case 'link':
-            	kembali = instaProf.getExternalUrl(igid).then(res => {
-	            const user = res.data;
-                return user;
-            });break;
-            case 'post':
-            	kembali = instaProf.getPosts(igid).then(res => {
-        	    const user = res.data;
-                return user;
-            });break;
-            case 'follower':
-            	kembali = instaProf.getFollowers(igid).then(res => {
-        	    const user = res.data;
-                return user;
-            });break;
-            case 'following':
-            	kembali = instaProf.getFollowing(igid).then(res => {
-	            const user = res.data;
-                return user;
-            });break;
-            case 'picprev':
-            	kembali = instaProf.instaRegular(igid).then(res => {
-	            const user = res.data;
-                return user;
-            });break;
-            case 'pichd':
-            	kembali = instaProf.instaHighDefinition(igid).then(res => {
-	            const user = res.data;
-                return user;
-            });break;
-        }
-        return kembali;
-
 
 
 
     //Bio IG
     function bioIG(token, igid){
-	    const fullName = getIG("fullName", igid);
-	    const igBio = getIG("bio", igid);
-	    const igLink = getIG("link", igid);
-	    const jmlPost = getIG("post", igid);
-	    const jmlFollower = getIG("follower", igid);
-	    const jmlFollowing = getIG("following", igid);
+	    const fullName = instaProf.getFullname(igid).then(res => {
+            const user = res.data;
+            return user;
+        });
+	    const igBio = instaProf.getBio(igid).then(res => {
+            const user = res.data;
+            return user;
+        });
+	    const igLink = instaProf.getExternalUrl(igid).then(res => {
+            const user = res.data;
+            return user;
+        });
+	    const jmlPost = instaProf.getPosts(igid).then(res => {
+            const user = res.data;
+            return user;
+        });
+	    const jmlFollower = instaProf.getFollowers(igid).then(res => {
+            const user = res.data;
+            return user;
+        });
+	    const jmlFollowing = instaProf.getFollowing(igid).then(res => {
+            const user = res.data;
+            return user;
+        });
 
 	const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igBio + "\nPosts: "+jmlPost+"\nFollowers: "+jmlFollower+"\nFollowing: "+jmlFollowing+"\nLink: "+igLink;
         return replyText(token, sendBio);
     }
 
     function profilIG(token, igid){
-	    const userprevlink = getIG("picprev", igid);
-	    const userhdlink = getIG("pichd", igid);
+	    const userprevlink = instaProf.instaRegular(igid).then(res => {
+            const user = res.data;
+            return user;
+        });
+	    const userhdlink = instaProf.instaHighDefinition(igid).then(res => {
+            const user = res.data;
+            return user;
+        });
 	    
         return client.replyMessage(token, {
             type: "image", originalContentUrl: userhdlink, previewImageUrl: userprevlink
