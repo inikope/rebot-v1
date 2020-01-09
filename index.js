@@ -53,18 +53,23 @@ app.get('/', (req, res) => {
 
         const storeName = (result) => {
             fullName = result.data;
+            return;
         }
         const storeBio = (result) => {
             igbio = result.data;
+            return;
         }
         const storePosts = (result) => {
             igpost = result.data;
+            return;
         }
         const storeFollower = (result) => {
             igfollower = result.data;
+            return;
         }
         const storeFollowing = (result) => {
             igfollowing = result.data;
+            return;
         }
         const storeLink = (result) => {
             if(result === 'false'){
@@ -72,6 +77,7 @@ app.get('/', (req, res) => {
             } else {
                 iglink = result.data;
             }
+            return;
         }
 
         async function parallel() {
