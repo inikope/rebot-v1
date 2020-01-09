@@ -69,7 +69,7 @@ app.get('/', (req, res) => {
                 console.log("Full Name: " + fullName);
                 console.log("Bio Instagram: " +igbio);
                 console.log("Link Instagram: " +iglink);
-                const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ values[2].data +"\nFollowers: "+ values[3].data +"\nFollowing: "+ values[4].data +"\nLink: "+ iglink;
+                const sendBio = "𝐍𝐚𝐦𝐚: "+ fullName +"\n𝐁𝐢𝐨:\n"+ igbio + "\n𝐏𝐨𝐬𝐭𝐬: "+ values[2].data +"\n𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬: "+ values[3].data +"\n𝐅𝐨𝐥𝐥𝐨𝐰𝐢𝐧𝐠: "+ values[4].data +"\n𝐋𝐢𝐧𝐤: "+ iglink;
                 return replyText(token, sendBio);    
             })
     }
