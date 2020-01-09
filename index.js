@@ -52,9 +52,9 @@ app.get('/', (req, res) => {
             const p6 = instaProf.getExternalUrl(igid);
             Promise.all([p1,p2,p3,p4,p5,p6]).then(function(values){
                 console.log(values);
-                const fullName = (values[0].data)? values[1].data : '-';
-                const igbio = (values[1].data)? values[2].data : '-';
-                const iglink = (values[5].data)? values[6].data : '-';
+                const fullName = (values[0].data)? values[0].data : '-';
+                const igbio = (values[1].data)? values[1].data : '-';
+                const iglink = (values[5].data)? values[5].data : '-';
                 console.log("Full Name: " + fullName);
                 console.log("Bio Instagram: " +igbio);
                 console.log("Link Instagram: " +iglink);
