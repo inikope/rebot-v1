@@ -40,7 +40,13 @@ app.get('/', (req, res) => {
 	// Reply yg asli:
 	// return client.replyMessage(event.replyToken, tutorVid);
 
-
+    function checkBio(value){
+        if(value){
+            return value.replace("\\\\","\\");
+        } else {
+            return '-';
+        }
+    }
 
     //Bio IG
     function bioIG(token, igid){
@@ -51,13 +57,6 @@ app.get('/', (req, res) => {
             const p5 = instaProf.getFollowing(igid);
             const p6 = instaProf.getExternalUrl(igid);
             Promise.all([p1,p2,p3,p4,p5,p6]).then(function(values){
-                function checkBio(value){
-                    if(value){
-                        return value.replace("\\\\","\\");
-                    } else {
-                        return '-';
-                    }
-                }
                 console.log(values);
                 const fullName = (values[0].data)? values[0].data : '-';
                 const igbio = checkBio(values[1].data);
