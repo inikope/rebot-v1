@@ -52,8 +52,13 @@ app.get('/', (req, res) => {
             const p6 = instaProf.getExternalUrl(igid);
             Promise.all([p1,p2,p3,p4,p5,p6]).then(function(values){
                 console.log(values);
-                console.log(values[1].data);
-                const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ values[3].data +"\nFollowers: "+ values[4].data +"\nFollowing: "+ values[5].data +"\nLink: "+ iglink;
+                const fullName = (values[0].data)? values[1].data : '-';
+                const igbio = (values[1].data)? values[2].data : '-';
+                const iglink = (values[5].data)? values[6].data : '-';
+                console.log("Full Name: " + fullName);
+                console.log("Bio Instagram: " +igbio);
+                console.log("Link Instagram: " +iglink);
+                const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ values[2].data +"\nFollowers: "+ values[3].data +"\nFollowing: "+ values[4].data +"\nLink: "+ iglink;
                 return replyText(token, sendBio);    
             })
     }
