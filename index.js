@@ -42,7 +42,9 @@ app.get('/', (req, res) => {
 
     function checkBio(value){
         if(value){
-            return value.replace("\\\\","\\");
+            value = value.replace("\\n","\n");
+            value = value.replace('\\"','\"');
+            return value.replace("\\'","\'");
         } else {
             return '-';
         }
