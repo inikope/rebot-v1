@@ -42,12 +42,12 @@ app.get('/', (req, res) => {
 
     //Bio IG
     function bioIG(token, igid){
-	    const fullName;
-	    const igBio;
-	    const igLink;
-	    const jmlPost;
-	    const jmlFollower;
-	    const jmlFollowing;
+	    const fullName = "";
+	    const igBio = "";
+	    const igLink = "";
+	    const jmlPost = 0;
+	    const jmlFollower = 0;
+	    const jmlFollowing = 0;
 
         instaProf.getFullname(igid).then(res => {
             fullName = res.data;
