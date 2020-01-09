@@ -78,7 +78,7 @@ app.get('/', (req, res) => {
         Promise.all([p1,p2]).then(function(values){
             console.log(values);
             return client.replyMessage(token, {
-                type: "image", originalContentUrl: values[1].data, previewImageUrl: values[0].data
+                type: "image", originalContentUrl: values[1], previewImageUrl: values[0]
             });    
         })
     }
