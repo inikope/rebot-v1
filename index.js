@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 // IG Get functions
     function getIG(what, igid){
-        const kembali = "";
+        var kembali = "";
 	    switch(what){
 		    case 'fullName':
             	kembali = instaProf.getFullname(igid).then(res => {
