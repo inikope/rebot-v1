@@ -81,7 +81,7 @@ app.get('/', (req, res) => {
 	    instaProf.getPosts(igid).then(storePosts);
 	    instaProf.getFollowers(igid).then(storeFollower);
 	    instaProf.getFollowing(igid).then(storeFollowing);
-	    instaProf.getLink(igid).then(storeLink);
+	    instaProf.getExternalUrl(igid).then(storeLink);
         console.log(fullName);
         console.log(igbio);
         console.log(igpost);
