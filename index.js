@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
     function checkBio(value){
         if(value){
-            while(value.includes("\\")){
+            while(value.contains("\\")){
                 value = value.replace("\\n","\n");
                 value = value.replace('\\"','\"');
                 value = value.replace("\\'","\'");    
@@ -66,9 +66,6 @@ app.get('/', (req, res) => {
                 const fullName = (values[0].data)? values[0].data : '-';
                 const igbio = checkBio(values[1].data);
                 const iglink = (values[5].data)? values[5].data : '-';
-                console.log("Full Name: " + fullName);
-                console.log("Bio Instagram: " +igbio);
-                console.log("Link Instagram: " +iglink);
                 const sendBio = "𝐍𝐚𝐦𝐚: "+ fullName +"\n𝐁𝐢𝐨:\n"+ igbio + "\n𝐏𝐨𝐬𝐭𝐬: "+ values[2].data +"\n𝐅𝐨𝐥𝐥𝐨𝐰𝐞𝐫𝐬: "+ values[3].data +"\n𝐅𝐨𝐥𝐥𝐨𝐰𝐢𝐧𝐠: "+ values[4].data +"\n𝐋𝐢𝐧𝐤: "+ iglink;
                 return replyText(token, sendBio);    
             })
@@ -79,6 +76,7 @@ app.get('/', (req, res) => {
         const p2 = instaProf.instaHighDefinition(igid);
         
         Promise.all([p1,p2]).then(function(values){
+            console.log(values);
             return client.replyMessage(token, {
                 type: "image", originalContentUrl: values[1].data, previewImageUrl: values[0].data
             });    
