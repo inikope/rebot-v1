@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 // IG Get functions
     function getIG(what, igid){
-        var kembali = "";
+        var kembali;
 	    switch(what){
 		    case 'fullName':
             	kembali = instaProf.getFullname(igid).then(res => {
@@ -60,20 +60,20 @@ app.get('/', (req, res) => {
                 return user;
             });break;
             case 'post':
-            	kembali = String(instaProf.getPosts(igid).then(res => {
+            	kembali = instaProf.getPosts(igid).then(res => {
         	    const user = res.data;
                 return user;
-            }));break;
+            });break;
             case 'follower':
-            	kembali = String(instaProf.getFollowers(igid).then(res => {
+            	kembali = instaProf.getFollowers(igid).then(res => {
         	    const user = res.data;
                 return user;
-            }));break;
+            });break;
             case 'following':
-            	kembali = String(instaProf.getFollowing(igid).then(res => {
+            	kembali = instaProf.getFollowing(igid).then(res => {
 	            const user = res.data;
                 return user;
-            }));break;
+            });break;
             case 'picprev':
             	kembali = instaProf.instaRegular(igid).then(res => {
 	            const user = res.data;
