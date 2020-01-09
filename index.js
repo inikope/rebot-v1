@@ -45,31 +45,31 @@ app.get('/', (req, res) => {
 
     //Bio IG
     function bioIG(token, igid){
-        var fullName;
-        var igbio;
-        var igpost;
-        var igfollower;
-        var igfollowing;
-        var iglink;
+        var fullName = instaProf.specificField(igid, 'fullname').data;
+        var igbio = instaProf.specificField(igid, 'bio').data;
+        var igpost = instaProf.specificField(igid, 'posts').data;
+        var igfollower = instaProf.specificField(igid, 'followers').data;
+        var igfollowing = instaProf.specificField(igid, 'following').data;
+        var iglink = instaProf.specificField(igid, 'externalUrl').data;
 
-	    instaProf.getFullname(igid).then(res => {
-            this.fullName = res.data;
-        });
-	    instaProf.getBio(igid).then(res => {
-            this.igbio = res.data;
-        });
-	    instaProf.getPosts(igid).then(res => {
-            this.igpost = res.data;
-        });
-	    instaProf.getFollowers(igid).then(res => {
-            this.igfollower = res.data;
-        });
-	    instaProf.getFollowing(igid).then(res => {
-            this.igfollowing = res.data;
-        });
-	    instaProf.getExternalUrl(igid).then(res => {
-            this.iglink = res.data;
-        });
+	    // instaProf.getFullname(igid).then(res => {
+        //     fullName = res.data;
+        // });
+	    // instaProf.getBio(igid).then(res => {
+        //     this.igbio = res.data;
+        // });
+	    // instaProf.getPosts(igid).then(res => {
+        //     this.igpost = res.data;
+        // });
+	    // instaProf.getFollowers(igid).then(res => {
+        //     this.igfollower = res.data;
+        // });
+	    // instaProf.getFollowing(igid).then(res => {
+        //     this.igfollowing = res.data;
+        // });
+	    // instaProf.getExternalUrl(igid).then(res => {
+        //     this.iglink = res.data;
+        // });
         console.log(fullName);
         const sendBio = "Nama: "+ fullName +"\nBio:\n"+ igbio + "\nPosts: "+ igpost +"\nFollowers: "+ igfollower +"\nFollowing: "+ igfollowing +"\nLink: "+ iglink;
         return replyText(token, sendBio);
