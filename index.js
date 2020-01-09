@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
     function checkBio(value){
         if(value){
-            while(value.contains("\\")){
+            while(value.includes("\\")){
                 value = value.replace("\\n","\n");
                 value = value.replace('\\"','\"');
                 value = value.replace("\\'","\'");    
